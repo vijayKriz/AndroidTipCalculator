@@ -32,9 +32,10 @@ public class MainActivity extends Activity {
 
 	public void calculateTip(View v) {
 		String strBillAmount = billAmount.getText().toString();
+		Float bill_amount = 0.0f;
+		Float tip_amount = 0.0f;
+		String calculatedTip = "$0.00";
 		if (!strBillAmount.equals("")) {
-			Float bill_amount = 0.0f;
-			Float tip_amount = 0.0f;
 			try {
 				bill_amount = Float.parseFloat(strBillAmount);
 			} catch (NumberFormatException e) {
@@ -57,14 +58,13 @@ public class MainActivity extends Activity {
 			}
 			DecimalFormat df = new DecimalFormat("0.00");
 			df.setMaximumFractionDigits(2);
-			String calculatedTip = "$" + df.format(tip_amount);
-			tipAmount.setText(calculatedTip);
+			calculatedTip = "$" + df.format(tip_amount);
 		} else {
 			// display warning if button push happens with no amount input
-			Toast.makeText(this,
-					"Please enter bill amount to calculate tip",
+			Toast.makeText(this, "Please enter bill amount to calculate tip",
 					Toast.LENGTH_SHORT).show();
 		}
+		tipAmount.setText(calculatedTip);
 
 	}
 }
